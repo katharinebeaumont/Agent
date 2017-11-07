@@ -13,9 +13,6 @@ import Memory.Experience;
 import Memory.Location;
 
 /**
- * Needs access to learning parameters
- * TODO: write comments for methods
- * TODO: write tests
  * 
  * @author katharine
  *
@@ -42,9 +39,6 @@ public class DecisionEngine {
 	}
 	
 	public Location pickRandomAction(Set<Location> possibleActions) {
-		//Possibly the wrong way to randomly select, as Set makes no
-		// guarantees as to order anyway. But would be good to ensure
-		// 'more' 'randomness'
 		ArrayList<Location> locations = new ArrayList<Location>();
 		locations.addAll(possibleActions);
         int options = possibleActions.size();

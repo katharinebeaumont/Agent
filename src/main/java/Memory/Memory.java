@@ -1,20 +1,16 @@
 package Memory;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import Learning.Direction;
 
 /**
- * TODO: comment methods
- * TODO: write tests
  * 
  * 1. Short temporal term memory: Where I am now, where have I been at each discrete time step
  * 
  * 2. Long term spatial/experiential memory: What happens when I move from one location (state) into 
  *  another (the action).
  *  
- * 3. Long term episodic memory: What are all of my movements over time
  */
 public class Memory {
 

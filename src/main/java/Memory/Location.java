@@ -6,7 +6,6 @@ import java.util.Set;
 import Learning.Direction;
 
 /**
- * TODO: check tests
  * 
  * Agent's concept of a location: agent's internal map of the world
  * 

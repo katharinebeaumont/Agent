@@ -20,8 +20,6 @@ import Memory.SpatialExperienceMemory;
  * Memory:
  * Q(S(t), A(t)) ← Q(S(t), A(t)) + α [ R(t+1) + γ max Q(S(t+1), a) − Q(S(t), A(t)) ].
  * 
- * TODO: firm up comments in class
- * TODO: write tests
  * 
  * @author katharine
  * I know about:
