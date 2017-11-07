@@ -62,31 +62,12 @@ public class Agent {
     }
     
     /*
-     * For epsilon amount of the time, explore,
+     * For epsilon percent of the time, explore,
      * otherwise pick the move that will maximise rewards
      */
     public Direction selectNextLocation(Set<Direction> directions) {
-    		Location currentLocation = memory.whereAmINow();
-    		Set<Location> nextLocations = currentLocation.getAdjacentLocationsForDirections(directions);
-    		
-    		if (nextLocations.isEmpty()) {
-    			logger.error("I have nowhere to go!");
-    			throw new RuntimeException("I'm stuck!");
-    		}
-    		
-    		Location action;
-        if (decisionEngine.shouldExplore()) {
-        		//Make a new memory!
-        		action = decisionEngine.pickRandomAction(nextLocations);
-        } else {
-        		//What do I remember? If nothing, default to random 
-        		action = decisionEngine.pickBestActionOrRandom(memory.getNextActionRewards(), nextLocations);
-        }
-        
-        Direction nextDirection = currentLocation.getDirectionOfAdjacentLocation(action);
-        logger.debug("Picked location " + action + ", direction is " + nextDirection);
-        memory.setNextDirectionChosen(nextDirection);
-        return nextDirection;
+    		//TODO implement me!
+    		throw new RuntimeException("IMPLEMENT ME");
     }
     
     /*
@@ -112,63 +93,28 @@ public class Agent {
     	    //    Q(S(t), A(t)) ← Q(S(t), A(t)) + rewardIncrement.
     	    // 6. Check if I've reached my goal, and update goalReached
     	
-    	
-    	    	 
-    	
     		Direction nextStep = memory.getNextDirectionChosen();
     		// S(t)
-    		Location currentLocation = memory.whereAmINow();
     		// A(t)
-    		Location nextLocation = currentLocation.getAdjacentLocationFromDirection(nextStep);
-    		
     		// R(t+1)
-    		double rewardFromEnvironment = experience.getReward();
     		
     		// I need to know what the existing memory is of moving from where I am now, 
     		//  to the next location
-    		HashMap<Location, Experience> actionRewards = memory.getNextActionRewards();
-    		// Existing memory of the reward from moving from S(t) to A(t):
     		// Q(S(t), A(t))
-    		Experience currentExperience = actionRewards.get(nextLocation);
-    		double currentMemoryOfReward = 0;
-    		if (currentExperience != null) {
-    			currentMemoryOfReward = currentExperience.getReward();
-    		}
     		
     		// What is the next best reward I could get, after I take the action? 
     		//  This is to get max Q(S(t+1), a)
-    		HashMap<Location, Experience> existingNewActionRewards = memory.getActionRewardsForLocation(nextLocation);
-    		double maxFutureRewardFromMemory = 0;
-    		for (Location l: existingNewActionRewards.keySet()) {
-    			Experience e = existingNewActionRewards.get(l);
-    			if (e.getReward() > maxFutureRewardFromMemory) {
-    				maxFutureRewardFromMemory = e.getReward();
-    			}
-    		}
     		
     		// This is 
     		// + α [ R(t+1) + γ max Q(S(t+1), a) − Q(S(t), A(t)) ].
-    		double rewardIncrement = decisionEngine.calculateRewardIncrement(currentMemoryOfReward, rewardFromEnvironment, 
-    				maxFutureRewardFromMemory);
-    		
-    		logger.debug("My new memory for moving from " + currentLocation + 
-    				" to " + nextLocation + " is being incremented by " + rewardIncrement);
-    		
-    		// This adds:
+    	
+    		// Adds:
     		//  Q(S(t), A(t)) ← Q(S(t), A(t)) + rewardIncrement.
-    		memory.update(currentLocation, nextLocation, rewardIncrement);
     		
     		// Move
-    		memory.move(nextLocation);
     		
     		// Did I reach my goal state?
-    		if (decisionEngine.haveReachedGoal(experience)) {
-    			logger.info("By moving to " + nextLocation + ", I achieved my goal!");
-    			goalReached = true;
-    		} else {
-    			logger.debug("Moved to " + nextLocation);
-	    		logger.debug("New (current) location " + memory.whereAmINow());
-    		}	
+    		throw new RuntimeException("IMPLEMENT ME");
     }
     
     public void resetLocation() {
@@ -203,11 +149,14 @@ public class Agent {
 				break;
 			}
 			
-			Location nextAction = decisionEngine.pickBestActionOrRandom(nextLocations, nextLocations.keySet());
+			Location nextAction = null;  //TODO: this needs doing!!!!!!
+			
 			optimalPath.add(nextAction);
 			reward = nextLocations.get(nextAction).getReward();
 			logger.debug("Reward from next action is " + reward);
 			currentLocation = nextAction;
+			throw new RuntimeException("IMPLEMENT ME");
+			
 		} 
 		
 		return optimalPath;
